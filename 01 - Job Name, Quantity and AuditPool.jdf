@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2022 Xerox Corporation.  All rights reserved. -->
+<JDF JobID="JobID-7955" JobPartID="JobPartID-7957" Type="Combined" Types="DigitalPrinting" Version="1.4" xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- 
+  AuditPool section required for JDF to be updated with PhaseTime and ProcessRun information at end of job processing 
+  When the option to Retrieve Job Accounting from Printer is enabled PhaseTime and ProcessRun information is retrieved from the DFE
+  -->
+  <AuditPool>
+    <!--
+    @AgentName maps to Submitted Name 
+    -->
+    <Created ID="7f1b" AgentName="Jav" AgentVersion="1.0" TimeStamp="2021-06-14T16:31:20.497-04:00" />
+  </AuditPool>
+  <ResourcePool>
+    <RunList ID="R1">
+      <RunList Run="1" Pages="0~-1">
+        <LayoutElement>
+          <!--
+          Default Job Name maps to the @URL filename without extensions 
+          -->
+          <FileSpec MimeType="application/pdf" URL="E:\Surya\16color.pdf" />
+        </LayoutElement>
+      </RunList>
+    </RunList>
+    <!--
+    @CustomerJobName overrides default Job Name 
+    -->
+    <CustomerInfo CustomerJobName="ipptime" ID="CI1" />
+    <Component Class="Quantity" ComponentType="FinalProduct" ID="C1" />
+    <!--
+    The option to Retrieve Job Accounting from Printer must be enabled when using UsageCounters
+
+    Counters for Black &amp; White, Color and Total Impressions 
+    -->
+    <UsageCounter CounterID="K_Only" CounterTypes="Black OneSided TwoSided Insert InsertPrefuser Impressions" ID="r000004" Scope="Job" />
+    <UsageCounter CounterID="CMYK" CounterTypes="Color OneSided TwoSided Insert InsertPrefuser Impressions" ID="r000005" Scope="Job" />
+    <UsageCounter CounterID="Total" CounterTypes="Black Color OneSided TwoSided Insert InsertPrefuser Impressions" ID="r000006" Scope="Job" />
+  </ResourcePool>
+  <ResourceLinkPool>
+    <RunListLink Usage="Input" rRef="R1" />
+    <CustomerInfoLink Usage="Input" rRef="CI1" />
+    <!--
+    Print quantity maps to @Amount
+    -->
+    <ComponentLink Usage="Output" Amount="1" rRef="C1" />
+    <UsageCounterLink Usage="Input" rRef="r000004"/>
+    <UsageCounterLink Usage="Input" rRef="r000005"/>
+    <UsageCounterLink Usage="Input" rRef="r000006"/>
+  </ResourceLinkPool>
+</JDF>
